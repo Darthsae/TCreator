@@ -1,0 +1,38 @@
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace <MOD>.Items
+{
+	public class <NAME> : ModItem
+	{
+		public override void SetDefaults()
+		{
+			Item.width = 10;
+			Item.height = 10;
+
+			Item.useStyle = ItemUseStyleID.<USESTYLE>;
+			Item.useTime = <USETIME>;
+			Item.useAnimation = <USEANIMATION>;
+			Item.autoReuse = <AUTOREUSE>;
+
+			Item.DamageType = DamageClass.<DAMAGETYPE>;
+			Item.damage = <DAMAGE>;
+			Item.knockBack = <KNOCKBACK>;
+			Item.crit = <CRIT>;
+
+			Item.value = Item.buyPrice(gold: <GOLDCOST>);
+			Item.rare = ItemRarityID.<RARITY>;
+			Item.UseSound = SoundID.<SOUND>;
+
+			Item.axe = <AXE>;
+			Item.hammer = <HAMMER>;
+			Item.pick = <PICK>;
+			Item.tileBoost = <TILEBOOST>;
+
+			Item.channel = <CHANNEL>;
+			Item.noMelee = <NOMELEE>;
+			Item.noUseGraphic = <NOUSEGRAPHIC>;
+		}
+	}
+}

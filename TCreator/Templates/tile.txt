@@ -1,0 +1,23 @@
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.ModLoader;
+
+namespace <MOD>.Tiles
+{
+	public class <NAME> : ModTile
+	{
+		public override void SetStaticDefaults() {
+			Main.tileSolid[Type] = <SOLID>;
+			Main.tileMergeDirt[Type] = <MERGEDIRT>;
+			Main.tileBlockLight[Type] = <BLOCKLIGHT>;
+
+			DustType = DustID.<DUST>;
+
+			AddMapEntry(new Color(<MAPR>, <MAPG>, <MAPB>));
+		}
+
+		public override void NumDust(int i, int j, bool fail, ref int num) {
+			num = fail ? 1 : 3;
+		}
+	}
+}
