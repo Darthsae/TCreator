@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace <MOD>.Tiles
 {
@@ -11,7 +12,7 @@ namespace <MOD>.Tiles
 			Main.tileMergeDirt[Type] = <MERGEDIRT>;
 			Main.tileBlockLight[Type] = <BLOCKLIGHT>;
 
-			DustType = DustID.<DUST>;
+			DustType = <DUST>;
 
 			AddMapEntry(new Color(<MAPR>, <MAPG>, <MAPB>));
 		}
