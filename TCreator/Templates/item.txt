@@ -11,19 +11,19 @@ namespace <MOD>.Items
 			Item.width = 10;
 			Item.height = 10;
 
-			Item.useStyle = ItemUseStyleID.<USESTYLE>;
+			Item.useStyle = <USESTYLE>;
 			Item.useTime = <USETIME>;
 			Item.useAnimation = <USEANIMATION>;
 			Item.autoReuse = <AUTOREUSE>;
 
-			Item.DamageType = DamageClass.<DAMAGETYPE>;
+			Item.DamageType = <DAMAGETYPE>;
 			Item.damage = <DAMAGE>;
 			Item.knockBack = <KNOCKBACK>;
 			Item.crit = <CRIT>;
 
 			Item.value = Item.buyPrice(gold: <GOLDCOST>);
-			Item.rare = ItemRarityID.<RARITY>;
-			Item.UseSound = SoundID.<SOUND>;
+			Item.rare = <RARITY>;
+			Item.UseSound = <SOUND>;
 
 			Item.axe = <AXE>;
 			Item.hammer = <HAMMER>;
@@ -33,6 +33,11 @@ namespace <MOD>.Items
 			Item.channel = <CHANNEL>;
 			Item.noMelee = <NOMELEE>;
 			Item.noUseGraphic = <NOUSEGRAPHIC>;
+
+			Item.accessory = <ACCESSORY>;
+			Item.defense = <DEFENSE>;
+
+			<PLACEABLETILE>
 		}
 	}
 }
