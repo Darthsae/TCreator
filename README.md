@@ -1,6 +1,6 @@
 # TCreator
 
-TCreator is a tool inspired by MCreator, specifically designed for creating custom elements in the game Terraria. With TCreator, you can unleash your creativity and easily design custom items, and tiles, with more planned for your Terraria mods.
+TCreator is a tool inspired by MCreator, specifically designed for creating custom elements in the game Terraria. With TCreator, you can unleash your creativity and easily design custom items, and tiles, with more planned for your Terraria mods. For more information see the wiki [here](https://github.com/Darthsae/TCreator/wiki)
 
 ## Note: Use with Caution
 
