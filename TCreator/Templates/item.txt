@@ -8,8 +8,8 @@ namespace <MOD>.Items
 	{
 		public override void SetDefaults()
 		{
-			Item.width = 10;
-			Item.height = 10;
+			Item.width = <WIDTH>;
+			Item.height = <HEIGHT>;
 
 			Item.useStyle = <USESTYLE>;
 			Item.useTime = <USETIME>;
