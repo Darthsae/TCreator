@@ -1,1 +1,1 @@
-C:\Users\sockm\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources
+C:\Users\sockm\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources {EXAMPLE PATH}
