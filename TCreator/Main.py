@@ -190,10 +190,10 @@ class ScrollableWindow(Frame):
             extras.append(item.values[val])
         if item.type == "item":
             print(f"{item.name}")
-            createElement(toMakeValue="'item'", nameValue=f"'{item.name}'", extraData=item.values);
+            createElement(toMakeValue="'item'", nameValue=f"'{item.name}'", extraData=item.values)
         elif item.type == "tile":
             print(f"{item.name}")
-            createElement(toMakeValue="'tile'", nameValue=f"'item.name'", extraData=item.values);
+            createElement(toMakeValue="'tile'", nameValue=f"'item.name'", extraData=item.values)
 
 def list_files_with_extension(directory, extension):
     if not os.path.exists(directory):
