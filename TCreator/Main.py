@@ -469,6 +469,32 @@ def createElement(toMakeValue="canMake.get(ACTIVE)", nameValue="simpledialog.ask
         replaces['<MAPG>'] = "str(mapg.get())"
         replaces['<MAPB>'] = "str(mapb.get())"
 
+    if not extraData == None:
+        try:
+            solid.set(bool(extraData["solid"] == "true"))
+        except:
+            pass
+        try:
+            mergeDirt.set(bool(extraData["merge_dirt"] == "true"))
+        except:
+            pass
+        try:
+            blockLight.set(bool(extraData["block_light"] == "true"))
+        except:
+            pass
+        try:
+            mapr.set(int(extraData["map_color_r"]))
+        except:
+            pass
+        try:
+            mapg.set(int(extraData["map_color_g"]))
+        except:
+            pass
+        try:
+            mapb.set(int(extraData["map_color_b"]))
+        except:
+            pass
+
     #print("eh")
     Button(root, text="Save", height = 1, width = 16, bg=accentColor, activebackground=highlightColor, command = lambda: create_file_from_template(f"Templates/{toMake}.txt", f"{currentpath}\\{toMake.capitalize()}s\\{name}.cs", replaces)).place(x=152, y=450)
 
