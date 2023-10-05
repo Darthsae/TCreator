@@ -6,6 +6,14 @@ import os, re
 from tkinter import simpledialog
 from PIL import Image
 
+class FileTypes:
+    Tile = 0
+    Item = 1
+    NPC = 2
+    Projectile = 3
+    Dust = 4
+    Buff = 5
+
 def get_image_dimensions(image_path, width=True, height=True):
     print(width)
     print(height)
@@ -57,20 +65,48 @@ def extract_number_from_string(string):
     else:
         return None
         
-def get_replaced_values(file_path):
+def get_replaced_values(file_path, file_type):
     with open(file_path, 'r') as file:
         content = file.read()
 
-    patternV = r'(\w+)\s+=\s+(.*?);'
-    matchesV = re.findall(patternV, content)
+    if file_type == FileTypes.Item:    
+        patternV = r'(\w+)\s+=\s+(.*?);'
+        matchesV = re.findall(patternV, content)
 
-    patternC = r'(?:Item|Tile)\.\w+\s+=\s+(.*?);'
-    matchesC = re.findall(patternC, content)
+        patternC = r'(?:Item|Tile)\.\w+\s+=\s+(.*?);'
+        matchesC = re.findall(patternC, content)
+        pattern = r'Item\.DefaultToPlaceableTile\(ModContent\.TileType<Tiles\.(\w+)>'
+        match = re.search(pattern, content)
 
-    replaced_values = {}
 
-    for matchC, matchV in zip(matchesC, matchesV):
-        replaced_values[f"<{str(matchV[0]).upper()}>"] = matchC
+        replaced_values = {}
+
+        for matchC, matchV in zip(matchesC, matchesV):
+            replaced_values[f"<{str(matchV[0]).upper()}>"] = matchC
+    elif file_type == FileTypes.Tile:
+        patternSolid = r'Main\.tileSolid\[Type\]\s+=\s+(.*?);'
+        patternMergeDirt = r'Main\.tileMergeDirt\[Type\]\s+=\s+(.*?);'
+        patternBlockLight = r'Main\.tileBlockLight\[Type\]\s+=\s+(.*?);'
+        patternDustType = r'DustType\s+=\s+(.*?);'
+        patternMapEntry = r'AddMapEntry\(new Color\((.*?)\)\);'
+    
+        matchSolid = re.search(patternSolid, content)
+        matchMergeDirt = re.search(patternMergeDirt, content)
+        matchBlockLight = re.search(patternBlockLight, content)
+        matchDustType = re.search(patternDustType, content)
+        matchMapEntry = re.search(patternMapEntry, content)
+    
+        tile_values = {
+            'solid': matchSolid.group(1) if matchSolid else None,
+            'merge_dirt': matchMergeDirt.group(1) if matchMergeDirt else None,
+            'block_light': matchBlockLight.group(1) if matchBlockLight else None,
+            'dust_type': matchDustType.group(1) if matchDustType else None,
+            'map_color_r': matchMapEntry.group(1).split(',')[0] if matchMapEntry else None,
+            'map_color_g': matchMapEntry.group(1).split(',')[1] if matchMapEntry else None,
+            'map_color_b': matchMapEntry.group(1).split(',')[2] if matchMapEntry else None
+        }
+
+    return tile_values
 
     return replaced_values
 
@@ -155,6 +191,9 @@ class ScrollableWindow(Frame):
         if item.type == "item":
             print(f"{item.name}")
             createElement(toMakeValue="'item'", nameValue=f"'{item.name}'", extraData=item.values);
+        elif item.type == "tile":
+            print(f"{item.name}")
+            createElement(toMakeValue="'tile'", nameValue=f"'item.name'", extraData=item.values);
 
 def list_files_with_extension(directory, extension):
     if not os.path.exists(directory):
@@ -390,6 +429,11 @@ def createElement(toMakeValue="canMake.get(ACTIVE)", nameValue="simpledialog.ask
                 defense.set(int(extraData["<DEFENSE>"]))
             except:
                 pass
+            try:
+                doTile.set(True)
+                tile.set(extraData["TileToPlace"])
+            except:
+                pass
     elif toMake == "tile":
         global solid, mergeDirt, blockLight, dust, mapr, mapg, mapb
         dusts = ["DustID.Stone"]
@@ -453,11 +497,11 @@ def openWorkspace(modpath, mod):
     tiles = list_files_with_extension(currentpath+"/Tiles", ".cs")
 
     for item in items:
-        toadd.append(ElementData("item", get_replaced_values(currentpath + "\\Items\\" + item + ".cs"), item))
+        toadd.append(ElementData("item", get_replaced_values(currentpath + "\\Items\\" + item + ".cs", FileTypes.Item), item))
         #print(item)
 
     for tile in tiles:
-        toadd.append(ElementData("tile", get_replaced_values(currentpath + "\\Tiles\\" + tile + ".cs"), tile))
+        toadd.append(ElementData("tile", get_replaced_values(currentpath + "\\Tiles\\" + tile + ".cs", FileTypes.Tile), tile))
         #print(tile)
 
     sideFrame = Frame(root, width=150, height=600, bg=secondaryThemeColor)
