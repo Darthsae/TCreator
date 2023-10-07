@@ -96,7 +96,7 @@ def get_replaced_values(file_path, file_type):
         matchDustType = re.search(patternDustType, content)
         matchMapEntry = re.search(patternMapEntry, content)
     
-        tile_values = {
+        replaced_values = {
             'solid': matchSolid.group(1) if matchSolid else None,
             'merge_dirt': matchMergeDirt.group(1) if matchMergeDirt else None,
             'block_light': matchBlockLight.group(1) if matchBlockLight else None,
@@ -105,8 +105,6 @@ def get_replaced_values(file_path, file_type):
             'map_color_g': matchMapEntry.group(1).split(',')[1] if matchMapEntry else None,
             'map_color_b': matchMapEntry.group(1).split(',')[2] if matchMapEntry else None
         }
-
-    return tile_values
 
     return replaced_values
 
