@@ -15,6 +15,10 @@ To get started with TCreator, follow these steps:
 2. Modify the `settings.txt` file found in the TCreator project. Update the `path` field to point to the directory where your mod sources are located.
 
 3. Run TCreator by executing the appropriate command or script for your operating system. Ensure that all necessary dependencies are installed.
+Dependencies of importance are Tkinter and pillow 
+To install these you can run these in the command line:
+pip install pillow
+pip install tk
 
 ## Contributing
 
